@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect, useLayoutEffect, useRef, startTransition, lazy, Suspense } from "react";
+import React, { useMemo, useCallback, useState, useEffect, useLayoutEffect, useRef, startTransition, lazy, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Home, BookOpen, Timer, Library, FolderClock, HelpCircle, ClipboardList,
