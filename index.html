@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐰</text></svg>" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="StudyBun NEET" />
+    <meta name="description" content="Your cozy NEET study companion — study tracking, planning, revision, and AI insights." />
+    <!-- Fonts moved here from a JS-injected <style>@import so the browser's
+         HTML preloader can discover + start fetching them immediately,
+         instead of waiting for the JS bundle to download, parse, execute,
+         and render before the @import inside GlobalStyle is even seen.
+         preconnect warms the connection. The stylesheet itself uses the
+         classic preload+swap trick: `rel="preload" as="style"` fetches it
+         with high priority WITHOUT blocking rendering, then the
+         onload flips it to a real stylesheet the instant it lands. Text
+         paints immediately in a fallback font (font-display: swap in the
+         Google Fonts CSS) and reflows to Baloo/Nunito/Caveat once ready --
+         a plain <link rel="stylesheet"> here would otherwise sit in the
+         render-blocking path for however long that request takes. <noscript>
+         covers the (rare) no-JS case. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@500;600;700;800&family=Caveat:wght@600;700&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@500;600;700;800&family=Caveat:wght@600;700&display=swap"
+      />
+    </noscript>
+    <title>StudyBun NEET · Your Cozy NEET Study Companion</title>
+    <style>
+      html[data-dark="true"],
+      html[data-dark="true"] body {
+        background: #0D0D0F;
+        color: #F0EFF3;
+        color-scheme: dark;
+      }
+    </style>
+    <!-- `beforeinstallprompt` fires as soon as the browser decides the app is
+         installable, which is regularly BEFORE the React bundle has finished
+         downloading and mounting. A listener added inside a component would
+         simply miss it, and the install banner would then believe the app
+         isn't installable at all. So we capture it here, at the very top of
+         the document, park it on window.__sbInstallPrompt, and re-broadcast a
+         `sb:installprompt` event that src/components/PWAPrompt.jsx picks up
+         whenever it happens to mount. preventDefault() stops Chrome's own
+         mini-infobar so our themed banner is the only nudge on screen. -->
+    <script>
+      (function () {
+        try {
+          var dm = window.localStorage && window.localStorage.getItem("sb-dark-mode-v1");
+          if (dm === "1" || dm === "true") {
+            document.documentElement.setAttribute("data-dark", "true");
+          }
+        } catch (err) {}
+        window.__sbInstallPrompt = null;
+        window.addEventListener("beforeinstallprompt", function (e) {
+          e.preventDefault();
+          window.__sbInstallPrompt = e;
+          window.dispatchEvent(new CustomEvent("sb:installprompt"));
+        });
+        window.addEventListener("appinstalled", function () {
+          window.__sbInstallPrompt = null;
+          window.dispatchEvent(new CustomEvent("sb:appinstalled"));
+        });
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
